@@ -12,7 +12,6 @@ import (
 	"github.com/adm87/finch-game/game"
 	"github.com/adm87/finch-game/module"
 	"github.com/adm87/finch-resources/filesystems"
-	"github.com/adm87/finch-resources/manifest"
 	"github.com/adm87/finch-resources/resources"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/spf13/cobra"
@@ -52,9 +51,9 @@ func main() {
 			resourcePath := path.Join(rootPath, "data")
 			fsys.DirectoryMustExist(resourcePath)
 
-			f.Context().Set("resource_path", resourcePath)
+			resources.LoadManifest(f.Context(), resourcePath)
 
-			resources.UseManifest(manifest.Load(f.Context(), resourcePath))
+			f.Context().Set("resource_path", resourcePath)
 
 			filesystems.Add("assets", os.DirFS(path.Join(resourcePath, "assets")))
 			filesystems.Add("embedded", data.EmbeddedFS)
