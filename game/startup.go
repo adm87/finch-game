@@ -7,5 +7,6 @@ import (
 )
 
 func Startup(ctx finch.Context) {
+	// Load the full manifest for testing purposes
 	resources.Load(ctx, linq.Keys(resources.Manifest())...)
 }
