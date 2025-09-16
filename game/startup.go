@@ -6,5 +6,5 @@ import (
 )
 
 func Startup(ctx finch.Context) {
-	resources.Load(ctx, "test_tilemap_infinite")
+	resources.Load(ctx, "test_tilemap")
 }
