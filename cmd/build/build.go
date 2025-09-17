@@ -2,6 +2,7 @@ package build
 
 import (
 	"github.com/adm87/finch-core/finch"
+	"github.com/adm87/finch-game/cmd/build/enums"
 	"github.com/adm87/finch-game/cmd/build/manifest"
 	"github.com/spf13/cobra"
 )
@@ -17,6 +18,7 @@ func Command(ctx finch.Context, rootPath *string) *cobra.Command {
 		SilenceUsage:  true,
 	}
 
+	cmd.AddCommand(enums.Command(ctx))
 	cmd.AddCommand(manifest.Command(ctx, rootPath))
 
 	return cmd

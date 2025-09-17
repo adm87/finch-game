@@ -4,38 +4,32 @@
     "type": "png"
   },
   "test_tilemap": {
-    "root": "assets",
     "path": "tilemaps/",
-    "type": "tmx",
-    "extras": {
-      "tsx_refs": [
-        "tileset"
-      ]
-    }
+    "refs": [
+      "tileset"
+    ],
+    "root": "assets",
+    "type": "tmx"
   },
   "test_tilemap_infinite": {
-    "root": "assets",
     "path": "tilemaps/",
-    "type": "tmx",
-    "extras": {
-      "tsx_refs": [
-        "tileset"
-      ]
-    }
+    "refs": [
+      "tileset"
+    ],
+    "root": "assets",
+    "type": "tmx"
   },
   "tileset": {
-    "root": "assets",
     "path": "tilesets/",
-    "type": "tsx",
-    "extras": {
-      "img_refs": [
-        "tileset_image"
-      ]
-    }
+    "refs": [
+      "tileset_image"
+    ],
+    "root": "assets",
+    "type": "tsx"
   },
   "tileset_image": {
-    "root": "assets",
     "path": "images/",
+    "root": "assets",
     "type": "png"
   }
 }
