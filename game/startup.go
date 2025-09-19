@@ -7,5 +7,5 @@ import (
 )
 
 func Startup(ctx finch.Context) {
-	resources.Load(ctx, data.TestTilemap)
+	resources.Load(ctx, data.TilemapExampleA)
 }

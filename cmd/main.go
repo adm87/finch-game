@@ -8,7 +8,6 @@ import (
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
 	"github.com/adm87/finch-game/cmd/build"
-	"github.com/adm87/finch-game/data"
 	"github.com/adm87/finch-game/game"
 	"github.com/adm87/finch-game/module"
 	"github.com/adm87/finch-resources/resources"
@@ -28,10 +27,10 @@ func main() {
 		WithWindow(&finch.Window{
 			Title:        "Finch Game v" + version,
 			ResizingMode: ebiten.WindowResizingModeDisabled,
-			Width:        1280,
-			Height:       720,
+			Width:        1170,
+			Height:       675,
 			Fullscreen:   setFullscreen,
-			RenderScale:  0.5,
+			RenderScale:  0.4,
 		}).
 		WithUpdate(game.Update).
 		WithDraw(game.Draw).
@@ -54,7 +53,6 @@ func main() {
 			f.Context().Set("resource_path", resourcePath)
 
 			resources.AddFilesystem("assets", os.DirFS(path.Join(resourcePath, "assets")))
-			resources.AddFilesystem("embedded", data.EmbeddedFS)
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return finch.Run(f)

@@ -2,21 +2,17 @@ package game
 
 import (
 	"github.com/adm87/finch-core/finch"
+	"github.com/adm87/finch-game/data"
 	"github.com/adm87/finch-tiled/tiled"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
+var img *ebiten.Image
+
 func Draw(ctx finch.Context, screen *ebiten.Image) {
-	tmb := tiled.Buffer(ctx, "test_tilemap")
-	if tmb == nil {
-		ebitenutil.DebugPrint(screen, "Tilemap not loaded")
-		return
+	if img == nil {
+		img = tiled.Buffer(ctx, data.TilemapExampleA)
 	}
 
-	op := &ebiten.DrawImageOptions{}
-
-	screen.DrawImage(tmb, op)
-
-	ebitenutil.DebugPrint(screen, "Hello, Finch Game!")
+	screen.DrawImage(img, &ebiten.DrawImageOptions{})
 }
