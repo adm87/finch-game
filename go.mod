@@ -3,9 +3,9 @@ module github.com/adm87/finch-game
 go 1.25.1
 
 require (
-	github.com/adm87/finch-core v0.0.0-20250918013049-064839093953
+	github.com/adm87/finch-core v0.0.0-20250921132101-8283b55bf258
 	github.com/adm87/finch-resources v0.0.0-20250919203626-55b901c9841b
-	github.com/adm87/finch-tiled v0.0.0-20250919203849-73c7bbdaf2df
+	github.com/adm87/finch-tiled v0.0.0-20250921132338-3e68e32ea37f
 	github.com/spf13/cobra v1.10.1
 )
 
