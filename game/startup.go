@@ -15,6 +15,8 @@ var renderTarget *ebiten.Image
 var cameraOutline *ebiten.Image
 var imageOutline *ebiten.Image
 
+var selectedMap resources.ResourceHandle = data.TilemapExampleA
+
 func Startup(ctx finch.Context) {
 	width := float64(ctx.Screen().Width()) / 2.0
 	height := float64(ctx.Screen().Height()) / 2.0
@@ -28,5 +30,8 @@ func Startup(ctx finch.Context) {
 	cameraOutline.Fill(color.White)
 	imageOutline.Fill(color.White)
 
-	resources.Load(ctx, data.TilemapExampleA)
+	resources.Load(ctx,
+		data.TilemapExampleA,
+		data.TilemapExampleB,
+	)
 }

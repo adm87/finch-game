@@ -2,10 +2,24 @@ package game
 
 import (
 	"github.com/adm87/finch-core/finch"
+	"github.com/adm87/finch-game/data"
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 func Update(ctx finch.Context) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		finch.Exit()
+		return
+	}
+
+	if inpututil.IsKeyJustPressed(ebiten.KeyF1) {
+		selectedMap = data.TilemapExampleA
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyF2) {
+		selectedMap = data.TilemapExampleB
+	}
+
 	x, y := ebiten.CursorPosition()
 
 	camera.X = float64(x)
