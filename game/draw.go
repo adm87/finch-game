@@ -12,19 +12,18 @@ import (
 )
 
 func Draw(ctx finch.Context, screen *ebiten.Image) {
+	viewport := camera.Viewport()
+
 	renderTarget.Fill(color.RGBA{R: 100, G: 149, B: 237, A: 255})
-	tiled.DrawRegion(ctx, renderTarget, selectedMap, camera.Viewport())
+	tiled.DrawRegion(ctx, renderTarget, selectedMap, viewport)
 
-	sw, sh := ctx.Screen().Width(), ctx.Screen().Height()
-	hw, hh := sw/2, sh/2
-
-	x := float64(sw-hw) / 2
-	y := float64(sh-hh) / 2
+	x := float64((ctx.Screen().Width() - renderTarget.Bounds().Dx()) / 2)
+	y := float64((ctx.Screen().Height() - renderTarget.Bounds().Dy()) / 2)
 
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(x, y)
 
-	draw_rect(screen, cameraOutline, camera.Viewport(), color.RGBA{R: 255, A: 255})
+	draw_rect(screen, cameraOutline, viewport, color.RGBA{R: 255, A: 255})
 	screen.DrawImage(renderTarget, op)
 	draw_rect(screen, imageOutline, geom.NewRect64(x, y, float64(renderTarget.Bounds().Dx()), float64(renderTarget.Bounds().Dy())), color.RGBA{G: 255, A: 255})
 

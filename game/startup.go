@@ -18,8 +18,8 @@ var imageOutline *ebiten.Image
 var selectedMap resources.ResourceHandle = data.TilemapExampleA
 
 func Startup(ctx finch.Context) {
-	width := float64(ctx.Screen().Width()) / 2.0
-	height := float64(ctx.Screen().Height()) / 2.0
+	width := float64(ctx.Screen().Width()) / 2
+	height := float64(ctx.Screen().Height()) / 2
 
 	camera = NewCamera(width, height)
 	renderTarget = ebiten.NewImage(int(width), int(height))
