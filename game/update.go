@@ -3,6 +3,7 @@ package game
 import (
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-game/data"
+	"github.com/adm87/finch-tiled/tiled"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
@@ -14,32 +15,34 @@ func Update(ctx finch.Context) {
 	}
 
 	if inpututil.IsKeyJustPressed(ebiten.KeyF1) {
-		selectedMap = data.TilemapExampleA
+		selectedMap, _ = tiled.GetTmx(data.TilemapExampleA)
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyF2) {
-		selectedMap = data.TilemapExampleB
+		selectedMap, _ = tiled.GetTmx(data.TilemapExampleB)
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyF3) {
+		selectedMap, _ = tiled.GetTmx(data.TilemapInfinite)
 	}
 
-	x, y := ebiten.CursorPosition()
-
-	camera.X = float64(x)
-	camera.Y = float64(y)
-
-	viewport := camera.Viewport()
-
-	minx, miny := viewport.Min()
-	maxx, maxy := viewport.Max()
-
-	if minx < 0 {
-		camera.X = viewport.Width() / 2
+	if _, scrollY := ebiten.Wheel(); scrollY != 0 {
+		camera.SetZoom(camera.Zoom() * (1 + scrollY*0.1))
 	}
-	if miny < 0 {
-		camera.Y = viewport.Height() / 2
+
+	dx, dy := 0.0, 0.0
+
+	if ebiten.IsKeyPressed(ebiten.KeyLeft) || ebiten.IsKeyPressed(ebiten.KeyA) {
+		dx = -1
 	}
-	if maxx > float64(ctx.Screen().Width()) {
-		camera.X = float64(ctx.Screen().Width()) - (viewport.Width() / 2)
+	if ebiten.IsKeyPressed(ebiten.KeyRight) || ebiten.IsKeyPressed(ebiten.KeyD) {
+		dx = 1
 	}
-	if maxy > float64(ctx.Screen().Height()) {
-		camera.Y = float64(ctx.Screen().Height()) - (viewport.Height() / 2)
+	if ebiten.IsKeyPressed(ebiten.KeyUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
+		dy = -1
 	}
+	if ebiten.IsKeyPressed(ebiten.KeyDown) || ebiten.IsKeyPressed(ebiten.KeyS) {
+		dy = 1
+	}
+
+	camera.X += dx * 100 * ctx.Time().DeltaSeconds()
+	camera.Y += dy * 100 * ctx.Time().DeltaSeconds()
 }

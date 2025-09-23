@@ -11,6 +11,7 @@ const (
 	TilemapCharactersPacked resources.ResourceHandle = "tilemap-characters_packed" // assets/images/tilemap-characters_packed.png
 	TilemapExampleA         resources.ResourceHandle = "tilemap-example-a"         // assets/tilemaps/tilemap-example-a.tmx
 	TilemapExampleB         resources.ResourceHandle = "tilemap-example-b"         // assets/tilemaps/tilemap-example-b.tmx
+	TilemapInfinite         resources.ResourceHandle = "tilemap-infinite"          // assets/tilemaps/tilemap-infinite.tmx
 	TilemapPacked           resources.ResourceHandle = "tilemap_packed"            // assets/images/tilemap_packed.png
 	TilesetCharacters       resources.ResourceHandle = "tileset-characters"        // assets/tilesets/tileset-characters.tsx
 	TilesetTiles            resources.ResourceHandle = "tileset-tiles"             // assets/tilesets/tileset-tiles.tsx

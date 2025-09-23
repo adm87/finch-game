@@ -2,9 +2,9 @@
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="18" tileheight="18" infinite="0" nextlayerid="15" nextobjectid="1">
  <tileset firstgid="1" source="../tilesets/tileset-characters.tsx"/>
  <tileset firstgid="28" source="../tilesets/tileset-tiles.tsx"/>
- <layer id="1" name="Tiles" width="26" height="15" locked="1">
+ <layer id="1" name="Tiles" width="26" height="15">
   <data encoding="csv">
-132,150,132,132,150,150,151,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+144,150,132,132,150,150,151,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 150,132,132,150,150,132,151,0,0,0,0,0,45,46,47,0,0,0,0,179,0,0,0,0,0,0,
 132,150,132,150,132,32,171,0,0,0,0,45,66,66,67,0,0,0,179,0,0,0,0,0,0,0,
 150,150,32,170,170,171,0,0,0,0,0,85,66,66,67,0,0,179,0,0,0,181,183,0,0,0,
