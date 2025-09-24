@@ -2,6 +2,7 @@ package module
 
 import (
 	"github.com/adm87/finch-core/finch"
+
 	resources "github.com/adm87/finch-resources/module"
 	tiled "github.com/adm87/finch-tiled/module"
 )
