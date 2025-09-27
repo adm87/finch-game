@@ -8,20 +8,19 @@ import (
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
 	"github.com/adm87/finch-core/images"
-	"github.com/adm87/finch-game/cmd/generate"
 	"github.com/adm87/finch-game/game"
 	"github.com/adm87/finch-tiled/tiled"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/spf13/cobra"
 )
 
-var version = "0.0.0-unreleased"
+var (
+	version       = "0.0.0-unreleased"
+	rootPath      = "."
+	setFullscreen = false
+)
 
 func main() {
-	var (
-		rootPath      string
-		setFullscreen bool
-	)
 
 	images.RegisterAssetManager()
 	tiled.RegisterTMXAssetManager()
@@ -62,10 +61,9 @@ func main() {
 		SilenceUsage:  true,
 	}
 
-	cmd.AddCommand(generate.Generate(f.Context()))
-
-	cmd.PersistentFlags().StringVar(&rootPath, "root", rootPath, "Sets the root of the application")
-	cmd.Flags().BoolVar(&setFullscreen, "fullscreen", setFullscreen, "Set to run in fullscreen mode")
+	add_sub_commands(cmd, f.Context())
+	add_persistent_flags(cmd, f.Context())
+	add_flags(cmd, f.Context())
 
 	if err := cmd.ExecuteContext(f.Context().Context()); err != nil {
 		panic(err)
