@@ -8,6 +8,7 @@ import (
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
 	"github.com/adm87/finch-core/images"
+	"github.com/adm87/finch-game/cmd/generate"
 	"github.com/adm87/finch-game/game"
 	"github.com/adm87/finch-tiled/tiled"
 	"github.com/hajimehoshi/ebiten/v2"
@@ -60,6 +61,8 @@ func main() {
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
+
+	cmd.AddCommand(generate.Generate(f.Context()))
 
 	cmd.PersistentFlags().StringVar(&rootPath, "root", rootPath, "Sets the root of the application")
 	cmd.Flags().BoolVar(&setFullscreen, "fullscreen", setFullscreen, "Set to run in fullscreen mode")
