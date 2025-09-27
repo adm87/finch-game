@@ -3,20 +3,18 @@ module github.com/adm87/finch-game
 go 1.25.1
 
 require (
-	github.com/adm87/finch-core v0.0.0-20250924004304-1acb7f5416e0
-	github.com/adm87/finch-resources v0.0.0-20250919203626-55b901c9841b
-	github.com/adm87/finch-tiled v0.0.0-20250924004406-ac324cea3b81
+	github.com/adm87/finch-core v0.0.1
 	github.com/spf13/cobra v1.10.1
 )
 
 require (
+	github.com/adm87/finch-tiled v0.0.1 // indirect
 	github.com/ebitengine/gomobile v0.0.0-20240911145611-4856209ac325 // indirect
 	github.com/ebitengine/hideconsole v1.0.0 // indirect
 	github.com/ebitengine/purego v0.8.0 // indirect
 	github.com/jezek/xgb v1.1.1 // indirect
 	golang.org/x/sync v0.16.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
 require (

@@ -2,31 +2,24 @@ package game
 
 import (
 	"github.com/adm87/finch-core/finch"
-	"github.com/adm87/finch-game/data"
-	"github.com/adm87/finch-resources/resources"
-	"github.com/adm87/finch-tiled/tiled"
-	"github.com/hajimehoshi/ebiten/v2"
 )
 
-var camera *Camera
-var selectedMap *tiled.TMX
-var lvlTexture *ebiten.Image
+var (
+	tilemapPackedImg           = finch.AssetFile("assets/images/tilemap_packed.png")
+	tilemapCharactersPackedImg = finch.AssetFile("assets/images/tilemap-characters_packed.png")
+	tilemapExampleATmx         = finch.AssetFile("assets/tilemaps/tilemap-example-a.tmx")
+	tilemapExampleBTmx         = finch.AssetFile("assets/tilemaps/tilemap-example-b.tmx")
+	tilesetTilesTsx            = finch.AssetFile("assets/tilesets/tileset-tiles.tsx")
+	tilesetCharactersTsx       = finch.AssetFile("assets/tilesets/tileset-characters.tsx")
+)
 
 func Startup(ctx finch.Context) {
-	resources.Load(ctx,
-		data.TilemapExampleA,
-		data.TilemapExampleB,
+	finch.MustLoadAssets(
+		tilemapPackedImg,
+		tilemapCharactersPackedImg,
+		tilemapExampleATmx,
+		tilemapExampleBTmx,
+		tilesetTilesTsx,
+		tilesetCharactersTsx,
 	)
-
-	width := float64(ctx.Screen().Width())
-	height := float64(ctx.Screen().Height())
-
-	camera = NewCamera(width, height)
-
-	camera.X = width / 2
-	camera.Y = height / 2
-
-	selectedMap, _ = tiled.GetTmx(data.TilemapExampleA)
-
-	lvlTexture = ebiten.NewImage(ctx.Screen().Width(), ctx.Screen().Height())
 }

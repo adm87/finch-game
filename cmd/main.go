@@ -7,10 +7,9 @@ import (
 
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
-	"github.com/adm87/finch-game/cmd/build"
+	"github.com/adm87/finch-core/images"
 	"github.com/adm87/finch-game/game"
-	"github.com/adm87/finch-game/module"
-	"github.com/adm87/finch-resources/resources"
+	"github.com/adm87/finch-tiled/tiled"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/spf13/cobra"
 )
@@ -22,6 +21,10 @@ func main() {
 		rootPath      string
 		setFullscreen bool
 	)
+
+	images.RegisterAssetManager()
+	tiled.RegisterTMXAssetManager()
+	tiled.RegisterTSXAssetManager()
 
 	f := finch.NewApp().
 		WithWindow(&finch.Window{
@@ -41,18 +44,15 @@ func main() {
 		Short:   "A sample game using Finch and Ebitengine",
 		Version: version,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
-			module.Register(f.Context())
-
 			rootPath = fsys.MakeAbsolute(filepath.Clean(rootPath))
 			fsys.DirectoryMustExist(rootPath)
 
 			resourcePath := path.Join(rootPath, "data")
 			fsys.DirectoryMustExist(resourcePath)
 
-			resources.LoadManifest(f.Context(), resourcePath)
 			f.Context().Set("resource_path", resourcePath)
 
-			resources.AddFilesystem("assets", os.DirFS(path.Join(resourcePath, "assets")))
+			finch.RegisterAssetFilesystem(finch.AssetRoot("assets"), os.DirFS(path.Join(resourcePath, "assets")))
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return finch.Run(f)
@@ -60,8 +60,6 @@ func main() {
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
-
-	cmd.AddCommand(build.Command(f.Context(), &rootPath))
 
 	cmd.PersistentFlags().StringVar(&rootPath, "root", rootPath, "Sets the root of the application")
 	cmd.Flags().BoolVar(&setFullscreen, "fullscreen", setFullscreen, "Set to run in fullscreen mode")
