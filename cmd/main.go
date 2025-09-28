@@ -21,7 +21,6 @@ var (
 )
 
 func main() {
-
 	images.RegisterAssetManager()
 	tiled.RegisterTMXAssetManager()
 	tiled.RegisterTSXAssetManager()

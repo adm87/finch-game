@@ -4,6 +4,10 @@ github.com/adm87/finch-core v0.0.2 h1:NjUDfZ0Elv7POEIsnZwotT0ZMiOkgj+QQNzbHmo2PG
 github.com/adm87/finch-core v0.0.2/go.mod h1:cmf7U8JChtnbuj07B8tKbMlfdpme28pmiU5zkw31OBM=
 github.com/adm87/finch-tiled v0.0.1 h1:nFIUCqMsN4mYoQ3mVoTz2XWmLu7P+KP6VHELcvAjtfo=
 github.com/adm87/finch-tiled v0.0.1/go.mod h1:SYZBsl2FDOfNEBEvvnlHZKpk2MWgl7JZiS9f/813TuY=
+github.com/adm87/finch-tiled v0.0.2 h1:ooR3XJvcIuAzqi25IIvxcEgnma05SU7mzWbk4oQL9mI=
+github.com/adm87/finch-tiled v0.0.2/go.mod h1:mhJn0Eh8XAG9OXa+6yO/zZ2uCckcz7+225WDb8m1xD8=
+github.com/adm87/finch-tiled v0.0.3 h1:V1V8aavAHQFmk1sxMqKD21HtGON7XJDdY0ZF0r35v6k=
+github.com/adm87/finch-tiled v0.0.3/go.mod h1:mhJn0Eh8XAG9OXa+6yO/zZ2uCckcz7+225WDb8m1xD8=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/ebitengine/gomobile v0.0.0-20240911145611-4856209ac325 h1:Gk1XUEttOk0/hb6Tq3WkmutWa0ZLhNn/6fc6XZpM7tM=
 github.com/ebitengine/gomobile v0.0.0-20240911145611-4856209ac325/go.mod h1:ulhSQcbPioQrallSuIzF8l1NKQoD7xmMZc5NxzibUMY=

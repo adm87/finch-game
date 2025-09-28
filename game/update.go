@@ -20,6 +20,7 @@ func Update(ctx finch.Context) {
 	camera.Y += movement.Y * 100 * ctx.Time().DeltaSeconds()
 
 	viewport := camera.Viewport()
+	viewMatrix := camera.ViewMatrix()
 
 	hw := viewport.Width / 2
 	hh := viewport.Height / 2
@@ -29,6 +30,18 @@ func Update(ctx finch.Context) {
 
 	camera.X = fsys.Clamp(camera.X, hw, maxx)
 	camera.Y = fsys.Clamp(camera.Y, hh, maxy)
+
+	invt := viewMatrix
+	invt.Invert()
+
+	sx, sy := ebiten.CursorPosition()
+	wx, wy := invt.Apply(float64(sx), float64(sy))
+
+	hw = dynamicCollider.Width / 2.0
+	hh = dynamicCollider.Height / 2.0
+
+	dynamicCollider.X = float64(wx) - hw
+	dynamicCollider.Y = float64(wy) - hh
 }
 
 func poll_input(ctx finch.Context) {
@@ -36,11 +49,18 @@ func poll_input(ctx finch.Context) {
 		finch.Exit()
 	}
 
+	if inpututil.IsKeyJustPressed(ebiten.KeyF9) {
+		drawColliders = !drawColliders
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyF11) {
+		ebiten.SetFullscreen(!ebiten.IsFullscreen())
+	}
+
 	if inpututil.IsKeyJustPressed(ebiten.Key1) {
-		selectedMap = tiled.MustGetTMX(data.TilemapExampleA)
+		set_map(tiled.MustGetTMX(data.TilemapExampleA))
 	}
 	if inpututil.IsKeyJustPressed(ebiten.Key2) {
-		selectedMap = tiled.MustGetTMX(data.TilemapExampleB)
+		set_map(tiled.MustGetTMX(data.TilemapExampleB))
 	}
 
 	panX, panY = 0, 0

@@ -4,7 +4,7 @@ go 1.25.1
 
 require (
 	github.com/adm87/finch-core v0.0.2
-	github.com/adm87/finch-tiled v0.0.1
+	github.com/adm87/finch-tiled v0.0.3
 	github.com/spf13/cobra v1.10.1
 )
 
