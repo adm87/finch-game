@@ -1,6 +1,7 @@
 package game
 
 import (
+	"github.com/adm87/finch-collision/collision"
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/geom"
 	"github.com/adm87/finch-game/data"
@@ -8,11 +9,15 @@ import (
 )
 
 var selectedMap *tiled.TMX
-var panX, panY float64
 var camera *Camera
-var staticColliders []geom.Rect64
-var dynamicCollider geom.Rect64
+
+var panX, panY float64
+
 var drawColliders = true
+var drawCollisionGrid = true
+
+var collisionWorld *collision.CollisionWorld
+var debugCollider geom.Rect64
 
 func Startup(ctx finch.Context) {
 	finch.MustLoadAssets(
@@ -24,31 +29,36 @@ func Startup(ctx finch.Context) {
 		data.TilesetTiles,
 	)
 
-	set_map(tiled.MustGetTMX(data.TilemapExampleA))
-
 	camera = NewCamera(float64(ctx.Screen().Width()), float64(ctx.Screen().Height()))
 	camera.X = camera.width / 2
 	camera.Y = camera.height / 2
 
-	dynamicCollider = geom.NewRect64(0, 0, 16, 16)
+	collisionWorld = collision.NewCollisionWorld(9)
+
+	debugCollider = geom.NewRect64(0, 0, 16, 16)
+
+	setup_level(tiled.MustGetTMX(data.TilemapExampleA))
 }
 
-func set_map(tmx *tiled.TMX) {
+func setup_level(tmx *tiled.TMX) {
+	collisionWorld.Clear()
+
 	selectedMap = tmx
 
-	collisionLayer, ok := selectedMap.GetObjectGroupByName("collision")
+	collisionObjects, ok := tmx.GetObjectGroupByName("collision")
 	if !ok {
-		staticColliders = nil
 		return
 	}
 
-	staticColliders = make([]geom.Rect64, len(collisionLayer.Objects))
-	for i, obj := range collisionLayer.Objects {
-		staticColliders[i] = geom.NewRect64(
+	for _, obj := range collisionObjects.Objects {
+		rect := geom.NewRect64(
 			float64(obj.X()),
 			float64(obj.Y()),
 			float64(obj.Width()),
 			float64(obj.Height()),
 		)
+		collisionWorld.AddCollider(&rect)
 	}
+
+	collisionWorld.AddCollider(&debugCollider)
 }

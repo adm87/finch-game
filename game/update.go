@@ -31,17 +31,17 @@ func Update(ctx finch.Context) {
 	camera.X = fsys.Clamp(camera.X, hw, maxx)
 	camera.Y = fsys.Clamp(camera.Y, hh, maxy)
 
-	invt := viewMatrix
-	invt.Invert()
+	toWorld := viewMatrix
+	toWorld.Invert()
 
-	sx, sy := ebiten.CursorPosition()
-	wx, wy := invt.Apply(float64(sx), float64(sy))
+	mx, my := ebiten.CursorPosition()
+	wx, wy := toWorld.Apply(float64(mx), float64(my))
 
-	hw = dynamicCollider.Width / 2.0
-	hh = dynamicCollider.Height / 2.0
+	debugCollider.X = wx - debugCollider.Width/2
+	debugCollider.Y = wy - debugCollider.Height/2
 
-	dynamicCollider.X = float64(wx) - hw
-	dynamicCollider.Y = float64(wy) - hh
+	collisionWorld.UpdateCollider(&debugCollider)
+	collisionWorld.CheckCollision()
 }
 
 func poll_input(ctx finch.Context) {
@@ -52,15 +52,18 @@ func poll_input(ctx finch.Context) {
 	if inpututil.IsKeyJustPressed(ebiten.KeyF9) {
 		drawColliders = !drawColliders
 	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyF10) {
+		drawCollisionGrid = !drawCollisionGrid
+	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyF11) {
 		ebiten.SetFullscreen(!ebiten.IsFullscreen())
 	}
 
 	if inpututil.IsKeyJustPressed(ebiten.Key1) {
-		set_map(tiled.MustGetTMX(data.TilemapExampleA))
+		setup_level(tiled.MustGetTMX(data.TilemapExampleA))
 	}
 	if inpututil.IsKeyJustPressed(ebiten.Key2) {
-		set_map(tiled.MustGetTMX(data.TilemapExampleB))
+		setup_level(tiled.MustGetTMX(data.TilemapExampleB))
 	}
 
 	panX, panY = 0, 0
