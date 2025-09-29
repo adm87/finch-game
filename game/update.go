@@ -1,6 +1,8 @@
 package game
 
 import (
+	"github.com/adm87/finch-collision/colliders"
+	"github.com/adm87/finch-collision/collision"
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
 	"github.com/adm87/finch-core/geom"
@@ -9,6 +11,30 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
+
+func (h *TestCollisionHandler) OnCollision(contact *collision.ContactInfo) {
+	boxA := contact.ColliderA.(*colliders.BoxCollider)
+	boxB := contact.ColliderB.(*colliders.BoxCollider)
+
+	minxB, minyB := boxB.AABB().Min()
+	maxxB, maxyB := boxB.AABB().Max()
+
+	if contact.Normal.X != 0 {
+		if contact.Normal.X < 0 {
+			boxA.X = minxB - boxA.AABB().Width
+		} else {
+			boxA.X = maxxB
+		}
+	} else if contact.Normal.Y != 0 {
+		if contact.Normal.Y < 0 {
+			boxA.Y = minyB - boxA.AABB().Height
+		} else {
+			boxA.Y = maxyB
+		}
+	}
+
+	collisionWorld.UpdateCollider(boxA)
+}
 
 func Update(ctx finch.Context) {
 	pollInput(ctx)
@@ -37,11 +63,16 @@ func Update(ctx finch.Context) {
 	mx, my := ebiten.CursorPosition()
 	wx, wy := toWorld.Apply(float64(mx), float64(my))
 
-	debugCollider.X = wx - debugCollider.Width/2
-	debugCollider.Y = wy - debugCollider.Height/2
+	targetX = wx - debugCollider.Width/2
+	targetY = wy - debugCollider.Height/2
+}
 
-	collisionWorld.UpdateCollider(&debugCollider)
-	collisionWorld.CheckCollision()
+func FixedUpdate(ctx finch.Context) {
+	debugCollider.X = fsys.Lerp(debugCollider.X, targetX, ctx.Time().FixedSeconds()*10)
+	debugCollider.Y = fsys.Lerp(debugCollider.Y, targetY, ctx.Time().FixedSeconds()*10)
+	collisionWorld.UpdateCollider(debugCollider)
+
+	collisionWorld.CheckForCollisions(ctx.Time().FixedSeconds())
 }
 
 func pollInput(ctx finch.Context) {

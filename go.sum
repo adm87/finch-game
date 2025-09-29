@@ -2,10 +2,14 @@ github.com/adm87/finch-collision v0.0.1 h1:wyvDvblzoov6vQBQivpLlI8VoJybEmNRTkLbe
 github.com/adm87/finch-collision v0.0.1/go.mod h1:mtoFGs8U8b4eOVH1ObD5AYIbqiRb7yKOEpiDCW6NXiQ=
 github.com/adm87/finch-collision v0.0.2 h1:6FFasaGt3T2IxVWmz21yOgptaJpv4qgGw5rN3REJ2Bc=
 github.com/adm87/finch-collision v0.0.2/go.mod h1:YljLpcnLknW6mxjkuQLh1260SfJi9yQjHUIcEoZi2TA=
+github.com/adm87/finch-collision v0.0.3 h1:jIO/H3lDKvH9NQq6/5tLPoGU250QCELNXXOxphDn67s=
+github.com/adm87/finch-collision v0.0.3/go.mod h1:vnER4VrsiVlnnJDSJhrbwSFYU6dqFS3GEujLJxifxoE=
 github.com/adm87/finch-core v0.0.3 h1:XbLqweFgJkT0piqMloA7Sy6soAJJV6C4cgEqWcirvow=
 github.com/adm87/finch-core v0.0.3/go.mod h1:cmf7U8JChtnbuj07B8tKbMlfdpme28pmiU5zkw31OBM=
 github.com/adm87/finch-core v0.0.4 h1:F8WV2YzROxye7n7Cp08NoxqMhKcH27imeOCj6baB2Ds=
 github.com/adm87/finch-core v0.0.4/go.mod h1:cmf7U8JChtnbuj07B8tKbMlfdpme28pmiU5zkw31OBM=
+github.com/adm87/finch-core v0.0.5 h1:TPq7iteVD+naYLwl7veyENIp/2nqM2S+6gE1M0Yqct8=
+github.com/adm87/finch-core v0.0.5/go.mod h1:cmf7U8JChtnbuj07B8tKbMlfdpme28pmiU5zkw31OBM=
 github.com/adm87/finch-tiled v0.0.4 h1:o/Llj9zqzhy+ruHcCgoVeS9y5PCHh6vNdgNXuHPIilw=
 github.com/adm87/finch-tiled v0.0.4/go.mod h1:hvyUOglxSj/qN9idguruxekFQik08tQOKAVKZRxiLFA=
 github.com/adm87/finch-tiled v0.0.5 h1:fICBG04g5rl8/9f/F7ueANa6+tRpWlxgSVK46rHKHBA=

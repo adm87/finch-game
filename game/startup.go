@@ -1,12 +1,19 @@
 package game
 
 import (
+	"github.com/adm87/finch-collision/colliders"
 	"github.com/adm87/finch-collision/collision"
 	"github.com/adm87/finch-core/finch"
-	"github.com/adm87/finch-core/geom"
 	"github.com/adm87/finch-game/data"
 	"github.com/adm87/finch-tiled/tiled"
 )
+
+const (
+	PlayerCollisionLayer collision.CollisionLayer = 1 << iota
+	PlatformCollisionLayer
+)
+
+type TestCollisionHandler struct{}
 
 var selectedMap *tiled.TMX
 var camera *Camera
@@ -14,10 +21,12 @@ var camera *Camera
 var panX, panY float64
 
 var drawColliders = true
-var drawCollisionGrid = true
+var drawCollisionGrid = false
 
 var collisionWorld *collision.CollisionWorld
-var debugCollider geom.Rect64
+var debugCollider *colliders.BoxCollider
+
+var targetX, targetY float64
 
 func Startup(ctx finch.Context) {
 	finch.MustLoadAssets(
@@ -34,8 +43,15 @@ func Startup(ctx finch.Context) {
 	camera.Y = camera.height / 2
 
 	collisionWorld = collision.NewCollisionWorld(9)
+	collisionWorld.RegisterHandlers(
+		PlayerCollisionLayer|PlatformCollisionLayer,
+		&TestCollisionHandler{},
+	)
 
-	debugCollider = geom.NewRect64(0, 0, 16, 16)
+	debugCollider = colliders.NewBoxCollider(0, 0, 16, 16)
+	debugCollider.AddToLayer(PlayerCollisionLayer | PlatformCollisionLayer)
+	debugCollider.SetType(collision.ColliderDynamic)
+	debugCollider.SetCollisionDetection(collision.CollisionDetectionContinuous)
 
 	setupLevel(tiled.MustGetTMX(data.TilemapExampleA))
 }
@@ -51,14 +67,16 @@ func setupLevel(tmx *tiled.TMX) {
 	}
 
 	for _, obj := range collisionObjects.Objects {
-		rect := geom.NewRect64(
+		boxCollider := colliders.NewBoxCollider(
 			float64(obj.X()),
 			float64(obj.Y()),
 			float64(obj.Width()),
 			float64(obj.Height()),
 		)
-		collisionWorld.AddCollider(&rect)
+		boxCollider.AddToLayer(PlatformCollisionLayer)
+
+		collisionWorld.AddCollider(boxCollider)
 	}
 
-	collisionWorld.AddCollider(&debugCollider)
+	collisionWorld.AddCollider(debugCollider)
 }

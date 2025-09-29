@@ -3,8 +3,8 @@ module github.com/adm87/finch-game
 go 1.25.1
 
 require (
-	github.com/adm87/finch-collision v0.0.2
-	github.com/adm87/finch-core v0.0.4
+	github.com/adm87/finch-collision v0.0.3
+	github.com/adm87/finch-core v0.0.5
 	github.com/adm87/finch-tiled v0.0.5
 	github.com/spf13/cobra v1.10.1
 )

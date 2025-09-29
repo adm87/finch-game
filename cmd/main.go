@@ -34,6 +34,7 @@ func main() {
 			RenderScale:  0.4,
 		}).
 		WithUpdate(game.Update).
+		WithFixedUpdate(game.FixedUpdate).
 		WithDraw(game.Draw).
 		WithStartup(game.Startup)
 

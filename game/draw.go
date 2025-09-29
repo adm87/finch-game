@@ -15,7 +15,7 @@ func Draw(ctx finch.Context, screen *ebiten.Image) {
 	tiled.DrawScene(ctx, screen, selectedMap, viewport, viewMatrix)
 
 	if drawColliders {
-		collisionDebug.DrawColliders(collisionWorld, screen, debugCollider, viewMatrix)
+		collisionDebug.DrawColliders(collisionWorld, screen, debugCollider.AABB(), viewMatrix)
 	}
 	if drawCollisionGrid {
 		collisionDebug.DrawCollisionGrid(collisionWorld, screen, viewport, viewMatrix)
