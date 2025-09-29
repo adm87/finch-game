@@ -7,14 +7,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func add_sub_commands(cmd *cobra.Command, ctx finch.Context) {
+func addSubCommands(cmd *cobra.Command, ctx finch.Context) {
 	// Add sub-commands here if needed
 }
 
-func add_persistent_flags(cmd *cobra.Command, ctx finch.Context) {
+func addPersistentFlags(cmd *cobra.Command, ctx finch.Context) {
 	cmd.PersistentFlags().StringVar(&rootPath, "root", ".", "Set the project root path")
 }
 
-func add_flags(cmd *cobra.Command, ctx finch.Context) {
+func addFlags(cmd *cobra.Command, ctx finch.Context) {
 	cmd.Flags().BoolVar(&setFullscreen, "fullscreen", false, "Set fullscreen mode")
 }

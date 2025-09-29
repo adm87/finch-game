@@ -3,13 +3,13 @@ module github.com/adm87/finch-game
 go 1.25.1
 
 require (
-	github.com/adm87/finch-core v0.0.3
-	github.com/adm87/finch-tiled v0.0.4
+	github.com/adm87/finch-collision v0.0.2
+	github.com/adm87/finch-core v0.0.4
+	github.com/adm87/finch-tiled v0.0.5
 	github.com/spf13/cobra v1.10.1
 )
 
 require (
-	github.com/adm87/finch-collision v0.0.1 // indirect
 	github.com/ebitengine/gomobile v0.0.0-20240911145611-4856209ac325 // indirect
 	github.com/ebitengine/hideconsole v1.0.0 // indirect
 	github.com/ebitengine/purego v0.8.0 // indirect

@@ -39,7 +39,7 @@ func AssetFiles(ctx finch.Context) *cobra.Command {
 		SilenceUsage:  true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			root := ctx.Get("resource_path").(string)
-			assetPaths := get_asset_paths(root)
+			assetPaths := getAssetPaths(root)
 
 			wrapper := struct {
 				PackageName string
@@ -75,7 +75,7 @@ func AssetFiles(ctx finch.Context) *cobra.Command {
 	return cmd
 }
 
-func get_asset_paths(root string) map[string]string {
+func getAssetPaths(root string) map[string]string {
 	assetPaths := make(map[string]string)
 
 	filepath.Walk(root, func(path string, info os.FileInfo, err error) error {

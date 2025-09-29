@@ -37,10 +37,10 @@ func Startup(ctx finch.Context) {
 
 	debugCollider = geom.NewRect64(0, 0, 16, 16)
 
-	setup_level(tiled.MustGetTMX(data.TilemapExampleA))
+	setupLevel(tiled.MustGetTMX(data.TilemapExampleA))
 }
 
-func setup_level(tmx *tiled.TMX) {
+func setupLevel(tmx *tiled.TMX) {
 	collisionWorld.Clear()
 
 	selectedMap = tmx

@@ -11,7 +11,7 @@ import (
 )
 
 func Update(ctx finch.Context) {
-	poll_input(ctx)
+	pollInput(ctx)
 
 	movement := geom.NewPoint64(panX, panY).
 		Normalized()
@@ -44,7 +44,7 @@ func Update(ctx finch.Context) {
 	collisionWorld.CheckCollision()
 }
 
-func poll_input(ctx finch.Context) {
+func pollInput(ctx finch.Context) {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		finch.Exit()
 	}
@@ -60,10 +60,10 @@ func poll_input(ctx finch.Context) {
 	}
 
 	if inpututil.IsKeyJustPressed(ebiten.Key1) {
-		setup_level(tiled.MustGetTMX(data.TilemapExampleA))
+		setupLevel(tiled.MustGetTMX(data.TilemapExampleA))
 	}
 	if inpututil.IsKeyJustPressed(ebiten.Key2) {
-		setup_level(tiled.MustGetTMX(data.TilemapExampleB))
+		setupLevel(tiled.MustGetTMX(data.TilemapExampleB))
 	}
 
 	panX, panY = 0, 0

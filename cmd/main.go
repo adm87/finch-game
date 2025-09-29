@@ -7,7 +7,6 @@ import (
 
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
-	"github.com/adm87/finch-core/images"
 	"github.com/adm87/finch-game/game"
 	"github.com/adm87/finch-tiled/tiled"
 	"github.com/hajimehoshi/ebiten/v2"
@@ -21,7 +20,7 @@ var (
 )
 
 func main() {
-	images.RegisterAssetManager()
+	finch.RegisterImageAssetManager()
 	tiled.RegisterTMXAssetManager()
 	tiled.RegisterTSXAssetManager()
 
@@ -60,9 +59,9 @@ func main() {
 		SilenceUsage:  true,
 	}
 
-	add_sub_commands(cmd, f.Context())
-	add_persistent_flags(cmd, f.Context())
-	add_flags(cmd, f.Context())
+	addSubCommands(cmd, f.Context())
+	addPersistentFlags(cmd, f.Context())
+	addFlags(cmd, f.Context())
 
 	if err := cmd.ExecuteContext(f.Context().Context()); err != nil {
 		panic(err)
