@@ -30,6 +30,7 @@ func AssetFiles(ctx finch.Context) *cobra.Command {
 	var (
 		pkgName string = "assets"
 		output  string = ""
+		release bool   = false
 	)
 
 	cmd := &cobra.Command{
@@ -38,6 +39,10 @@ func AssetFiles(ctx finch.Context) *cobra.Command {
 		SilenceErrors: true,
 		SilenceUsage:  true,
 		RunE: func(cmd *cobra.Command, args []string) error {
+			if release {
+				return fmt.Errorf("release mode not implemented yet")
+			}
+
 			root := ctx.Get("resource_path").(string)
 			assetPaths := getAssetPaths(root)
 
@@ -68,6 +73,7 @@ func AssetFiles(ctx finch.Context) *cobra.Command {
 
 	cmd.Flags().StringVar(&pkgName, "package", pkgName, "Sets the package name for the generated file")
 	cmd.Flags().StringVar(&output, "output", output, "Sets the output file")
+	cmd.Flags().BoolVar(&release, "release", release, "Sets the generate mode to release to strip development assets files")
 
 	cmd.MarkFlagRequired("package")
 	cmd.MarkFlagRequired("output")

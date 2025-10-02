@@ -18,3 +18,7 @@
 
 !module/
 !module/**/*
+
+# Ignore specific file types regardless of location
+*.exe
+*.tiled-session

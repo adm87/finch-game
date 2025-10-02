@@ -1,6 +1,8 @@
 package game
 
 import (
+	"math"
+
 	"github.com/adm87/finch-collision/colliders"
 	"github.com/adm87/finch-collision/collision"
 	"github.com/adm87/finch-core/finch"
@@ -8,9 +10,9 @@ import (
 	"github.com/adm87/finch-tiled/tiled"
 )
 
-const (
-	PlayerCollisionLayer collision.CollisionLayer = 1 << iota
-	PlatformCollisionLayer
+var (
+	PlayerLayer   = collision.NewCollisionLayer("Player")
+	PlatformLayer = collision.NewCollisionLayer("Platform")
 )
 
 type TestCollisionHandler struct{}
@@ -22,6 +24,7 @@ var panX, panY float64
 
 var drawColliders = true
 var drawCollisionGrid = false
+var drawTiledMap = true
 
 var collisionWorld *collision.CollisionWorld
 var debugCollider *colliders.BoxCollider
@@ -30,6 +33,7 @@ var targetX, targetY float64
 
 func Startup(ctx finch.Context) {
 	finch.MustLoadAssets(
+		data.Tile0000,
 		data.TilemapCharactersPacked,
 		data.TilemapExampleA,
 		data.TilemapExampleB,
@@ -43,15 +47,20 @@ func Startup(ctx finch.Context) {
 	camera.Y = camera.height / 2
 
 	collisionWorld = collision.NewCollisionWorld(9)
-	collisionWorld.RegisterHandlers(
-		PlayerCollisionLayer|PlatformCollisionLayer,
-		&TestCollisionHandler{},
+
+	collisionWorld.AddCollisionRules(
+		PlayerLayer, collision.CollisionRules{
+			PlatformLayer: BlockMovement,
+		},
 	)
 
-	debugCollider = colliders.NewBoxCollider(0, 0, 16, 16)
-	debugCollider.AddToLayer(PlayerCollisionLayer | PlatformCollisionLayer)
+	targetX = camera.X
+	targetY = camera.Y
+
+	debugCollider = colliders.NewBoxCollider(targetX, targetY, 12, 14)
+	debugCollider.SetLayer(PlayerLayer)
 	debugCollider.SetType(collision.ColliderDynamic)
-	debugCollider.SetCollisionDetection(collision.CollisionDetectionContinuous)
+	debugCollider.SetDetectionType(collision.CollisionDetectionContinuous)
 
 	setupLevel(tiled.MustGetTMX(data.TilemapExampleA))
 }
@@ -73,10 +82,38 @@ func setupLevel(tmx *tiled.TMX) {
 			float64(obj.Width()),
 			float64(obj.Height()),
 		)
-		boxCollider.AddToLayer(PlatformCollisionLayer)
+		boxCollider.SetLayer(PlatformLayer)
 
 		collisionWorld.AddCollider(boxCollider)
 	}
 
 	collisionWorld.AddCollider(debugCollider)
+}
+
+func BlockMovement(contact *collision.ContactInfo) {
+	boxA := contact.ColliderA.(*colliders.BoxCollider)
+	boxB := contact.ColliderB.(*colliders.BoxCollider)
+
+	minxB, minyB := boxB.AABB().Min()
+	maxxB, maxyB := boxB.AABB().Max()
+
+	if contact.Normal.X != 0 {
+		if contact.Normal.X < 0 {
+			boxA.X = minxB - boxA.AABB().Width
+			targetX = math.Min(targetX, boxA.X)
+		} else {
+			boxA.X = maxxB
+			targetX = math.Max(targetX, boxA.X)
+		}
+	} else if contact.Normal.Y != 0 {
+		if contact.Normal.Y < 0 {
+			boxA.Y = minyB - boxA.AABB().Height
+			targetY = math.Min(targetY, boxA.Y)
+		} else {
+			boxA.Y = maxyB
+			targetY = math.Max(targetY, boxA.Y)
+		}
+	}
+
+	collisionWorld.UpdateCollider(boxA)
 }

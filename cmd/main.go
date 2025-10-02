@@ -1,14 +1,13 @@
 package main
 
 import (
-	"os"
+	"fmt"
 	"path"
 	"path/filepath"
 
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
 	"github.com/adm87/finch-game/game"
-	"github.com/adm87/finch-tiled/tiled"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/spf13/cobra"
 )
@@ -20,13 +19,9 @@ var (
 )
 
 func main() {
-	finch.RegisterImageAssetManager()
-	tiled.RegisterTMXAssetManager()
-	tiled.RegisterTSXAssetManager()
-
 	f := finch.NewApp().
 		WithWindow(&finch.Window{
-			Title:        "Finch Game v" + version,
+			Title:        fmt.Sprintf("Finch v%s - %s", version, BuildTag),
 			ResizingMode: ebiten.WindowResizingModeDisabled,
 			Width:        1170,
 			Height:       675,
@@ -35,6 +30,7 @@ func main() {
 		}).
 		WithUpdate(game.Update).
 		WithFixedUpdate(game.FixedUpdate).
+		WithLateUpdate(game.LateUpdate).
 		WithDraw(game.Draw).
 		WithStartup(game.Startup)
 
@@ -51,7 +47,10 @@ func main() {
 
 			f.Context().Set("resource_path", resourcePath)
 
-			finch.RegisterAssetFilesystem(finch.AssetRoot("assets"), os.DirFS(path.Join(resourcePath, "assets")))
+			// Note: The execution order of these configuration methods matter.
+			RegisterModules(f.Context())
+			RegisterAssetDirectories(f.Context(), resourcePath)
+			MustLoad(f.Context())
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return finch.Run(f)
@@ -60,9 +59,7 @@ func main() {
 		SilenceUsage:  true,
 	}
 
-	addSubCommands(cmd, f.Context())
-	addPersistentFlags(cmd, f.Context())
-	addFlags(cmd, f.Context())
+	SetupCommand(cmd, f.Context())
 
 	if err := cmd.ExecuteContext(f.Context().Context()); err != nil {
 		panic(err)

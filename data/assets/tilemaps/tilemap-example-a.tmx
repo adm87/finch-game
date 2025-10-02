@@ -21,7 +21,7 @@
 150,150,132,150,132,150,132,132,132,132,132,132,150,150,150,150,132,150,150,150,150,150,132,132,150,132
 </data>
  </layer>
- <objectgroup id="15" name="collision">
+ <objectgroup id="15" name="collision" locked="1">
   <object id="15" x="0" y="216" width="468" height="54"/>
   <object id="17" x="0" y="180" width="144" height="36"/>
   <object id="18" x="36" y="144" width="90" height="36"/>
@@ -74,7 +74,7 @@
 0,0,0,149,132,150,151,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="8" name="Characters" width="26" height="15" locked="1">
+ <layer id="8" name="Characters" width="26" height="15" visible="0" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

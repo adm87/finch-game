@@ -1,8 +1,6 @@
 package game
 
 import (
-	"github.com/adm87/finch-collision/colliders"
-	"github.com/adm87/finch-collision/collision"
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
 	"github.com/adm87/finch-core/geom"
@@ -12,59 +10,18 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
-func (h *TestCollisionHandler) OnCollision(contact *collision.ContactInfo) {
-	boxA := contact.ColliderA.(*colliders.BoxCollider)
-	boxB := contact.ColliderB.(*colliders.BoxCollider)
-
-	minxB, minyB := boxB.AABB().Min()
-	maxxB, maxyB := boxB.AABB().Max()
-
-	if contact.Normal.X != 0 {
-		if contact.Normal.X < 0 {
-			boxA.X = minxB - boxA.AABB().Width
-		} else {
-			boxA.X = maxxB
-		}
-	} else if contact.Normal.Y != 0 {
-		if contact.Normal.Y < 0 {
-			boxA.Y = minyB - boxA.AABB().Height
-		} else {
-			boxA.Y = maxyB
-		}
-	}
-
-	collisionWorld.UpdateCollider(boxA)
-}
-
 func Update(ctx finch.Context) {
 	pollInput(ctx)
 
 	movement := geom.NewPoint64(panX, panY).
 		Normalized()
 
-	camera.X += movement.X * 100 * ctx.Time().DeltaSeconds()
-	camera.Y += movement.Y * 100 * ctx.Time().DeltaSeconds()
+	targetX += movement.X * 100 * ctx.Time().DeltaSeconds()
+	targetY += movement.Y * 100 * ctx.Time().DeltaSeconds()
 
-	viewport := camera.Viewport()
-	viewMatrix := camera.ViewMatrix()
-
-	hw := viewport.Width / 2
-	hh := viewport.Height / 2
-
-	maxx := float64(selectedMap.Width())*float64(selectedMap.TileWidth()) - hw
-	maxy := float64(selectedMap.Height())*float64(selectedMap.TileHeight()) - hh
-
-	camera.X = fsys.Clamp(camera.X, hw, maxx)
-	camera.Y = fsys.Clamp(camera.Y, hh, maxy)
-
-	toWorld := viewMatrix
-	toWorld.Invert()
-
-	mx, my := ebiten.CursorPosition()
-	wx, wy := toWorld.Apply(float64(mx), float64(my))
-
-	targetX = wx - debugCollider.Width/2
-	targetY = wy - debugCollider.Height/2
+	if panY == 0 {
+		targetY += 200 * ctx.Time().DeltaSeconds()
+	}
 }
 
 func FixedUpdate(ctx finch.Context) {
@@ -75,17 +32,37 @@ func FixedUpdate(ctx finch.Context) {
 	collisionWorld.CheckForCollisions(ctx.Time().FixedSeconds())
 }
 
+func LateUpdate(ctx finch.Context) {
+	viewport := camera.Viewport()
+
+	hw := viewport.Width / 2
+	hh := viewport.Height / 2
+
+	maxx := float64(selectedMap.Width())*float64(selectedMap.TileWidth()) - hw
+	maxy := float64(selectedMap.Height())*float64(selectedMap.TileHeight()) - hh
+
+	camera.X = debugCollider.X + debugCollider.Width/2
+	camera.Y = debugCollider.Y + debugCollider.Height/2
+
+	camera.X = fsys.Clamp(camera.X, hw, maxx)
+	camera.Y = fsys.Clamp(camera.Y, hh, maxy)
+}
+
 func pollInput(ctx finch.Context) {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		finch.Exit()
 	}
 
-	if inpututil.IsKeyJustPressed(ebiten.KeyF9) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyF5) {
 		drawColliders = !drawColliders
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyF10) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyF6) {
 		drawCollisionGrid = !drawCollisionGrid
 	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyF7) {
+		drawTiledMap = !drawTiledMap
+	}
+
 	if inpututil.IsKeyJustPressed(ebiten.KeyF11) {
 		ebiten.SetFullscreen(!ebiten.IsFullscreen())
 	}

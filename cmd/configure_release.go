@@ -7,14 +7,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func addSubCommands(cmd *cobra.Command, ctx finch.Context) {
-	// Add sub-commands here if needed
+const BuildTag = "Release"
+
+func RegisterModules(ctx finch.Context) {
+	RegisterModulesShared(ctx)
 }
 
-func addPersistentFlags(cmd *cobra.Command, ctx finch.Context) {
-	cmd.PersistentFlags().StringVar(&rootPath, "root", ".", "Set the project root path")
+func RegisterAssetDirectories(ctx finch.Context, resourcePath string) {
+	RegisterAssetDirectoriesShared(ctx, resourcePath)
 }
 
-func addFlags(cmd *cobra.Command, ctx finch.Context) {
-	cmd.Flags().BoolVar(&setFullscreen, "fullscreen", false, "Set fullscreen mode")
+func SetupCommand(cmd *cobra.Command, ctx finch.Context) {
+	SetupCommandShared(cmd, ctx)
+}
+
+func MustLoad(ctx finch.Context) {
+	MustLoadShared(ctx)
 }
