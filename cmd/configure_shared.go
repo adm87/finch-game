@@ -10,8 +10,8 @@ import (
 )
 
 func RegisterModulesShared(ctx finch.Context) {
-	finch.RegisterImageAssetTypes()
-	tiled.RegisterTiledAssetImporter()
+	finch.RegisterImageAssetImport()
+	tiled.RegisterTiledAssetImporters()
 }
 
 func RegisterAssetDirectoriesShared(ctx finch.Context, resourcePath string) {

@@ -7,6 +7,9 @@
 
 !LICENSE
 
+!actor/
+!actor/**/*
+
 !cmd/
 !cmd/**/*
 
@@ -16,8 +19,11 @@
 !game/
 !game/**/*
 
-!module/
-!module/**/*
+!level/
+!level/**/*
+
+!properties/
+!properties/**/*
 
 # Ignore specific file types regardless of location
 *.exe

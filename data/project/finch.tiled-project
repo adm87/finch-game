@@ -1,11 +1,85 @@
 {
-  "automappingRulesFile": "",
-  "commands": [],
-  "compatibilityVersion": 1100,
-  "extensionsPath": "extensions",
-  "folders": [
-    "."
-  ],
-  "properties": [],
-  "propertyTypes": []
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "compatibilityVersion": 1100,
+    "extensionsPath": ".",
+    "folders": [
+        "../assets"
+    ],
+    "properties": [
+    ],
+    "propertyTypes": [
+        {
+            "id": 5,
+            "name": "ActorType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Pickup",
+                "Player",
+                "Enemy"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 1,
+            "name": "ColliderType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Dynamic",
+                "Static"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 2,
+            "name": "CollisionDetectionType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Discrete",
+                "Continuous"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 3,
+            "name": "CollisionLayer",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Player",
+                "Platform",
+                "Pickup"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "color": "#ffff0000",
+            "drawFill": false,
+            "id": 4,
+            "members": [
+                {
+                    "name": "ColliderType",
+                    "propertyType": "ColliderType",
+                    "type": "string",
+                    "value": "Dynamic"
+                },
+                {
+                    "name": "CollisionLayer",
+                    "propertyType": "CollisionLayer",
+                    "type": "string",
+                    "value": "Player"
+                }
+            ],
+            "name": "CollisionProperties",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object"
+            ]
+        }
+    ]
 }

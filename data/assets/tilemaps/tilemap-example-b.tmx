@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="18" tileheight="18" infinite="0" nextlayerid="12" nextobjectid="10">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="18" tileheight="18" infinite="0" nextlayerid="12" nextobjectid="31">
  <tileset firstgid="1" source="../tilesets/tileset-characters.tsx"/>
  <tileset firstgid="28" source="../tilesets/tileset-tiles.tsx"/>
- <layer id="1" name="Tiles" width="26" height="15">
+ <layer id="1" name="Tiles" width="26" height="15" locked="1">
   <data encoding="csv">
 0,0,0,0,143,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 2684354703,2684354703,2684354703,2684354703,142,0,0,35,0,36,0,181,182,183,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -21,18 +21,27 @@
 150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,102,150,150,150,150,150
 </data>
  </layer>
- <objectgroup id="11" name="collision">
-  <object id="1" x="0" y="162" width="90" height="72"/>
-  <object id="2" x="90" y="180" width="72" height="54"/>
-  <object id="3" x="252" y="180" width="72" height="54"/>
-  <object id="4" x="324" y="162" width="90" height="72"/>
-  <object id="5" x="414" y="144" width="54" height="90"/>
-  <object id="6" x="162" y="198" width="90" height="36"/>
-  <object id="7" x="0" y="0" width="36" height="108"/>
-  <object id="8" x="36" y="0" width="54" height="36"/>
-  <object id="9" x="36" y="36" width="18" height="36"/>
+ <objectgroup id="11" name="MapCollision">
+  <object id="10" template="../templates/map-collider.tx" x="0" y="162" width="90" height="108"/>
+  <object id="11" template="../templates/map-collider.tx" x="90" y="180" width="72" height="90"/>
+  <object id="12" template="../templates/map-collider.tx" x="162" y="198" width="90" height="72"/>
+  <object id="13" template="../templates/map-collider.tx" x="252" y="180" width="72" height="90"/>
+  <object id="14" template="../templates/map-collider.tx" x="324" y="162" width="90" height="108"/>
+  <object id="15" template="../templates/map-collider.tx" x="414" y="144" width="54" height="126"/>
+  <object id="16" template="../templates/map-collider.tx" x="0" y="72" width="36" height="36"/>
+  <object id="17" template="../templates/map-collider.tx" x="0" y="0" width="54" height="72"/>
+  <object id="18" template="../templates/map-collider.tx" x="54" y="0" width="36" height="36"/>
+  <object id="19" template="../templates/map-collider.tx" x="108" y="36" width="36" height="18"/>
+  <object id="20" template="../templates/map-collider.tx" x="198" y="18" width="54" height="18"/>
+  <object id="21" template="../templates/map-collider.tx" x="324" y="36" width="18" height="10"/>
+  <object id="22" template="../templates/map-collider.tx" x="414" y="54" width="36" height="18"/>
+  <object id="23" template="../templates/map-collider.tx" x="342" y="108" width="54" height="18"/>
+  <object id="24" template="../templates/map-collider.tx" x="306" y="126" width="18" height="10"/>
+  <object id="25" template="../templates/map-collider.tx" x="252" y="90" width="54" height="18"/>
+  <object id="26" template="../templates/map-collider.tx" x="180" y="126" width="54" height="18"/>
+  <object id="27" template="../templates/map-collider.tx" x="72" y="90" width="90" height="18"/>
  </objectgroup>
- <layer id="9" name="Tiles (layer)" width="26" height="15">
+ <layer id="9" name="Tiles (layer)" width="26" height="15" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -51,7 +60,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="7" name="Water" width="26" height="15">
+ <layer id="7" name="Water" width="26" height="15" locked="1">
   <data encoding="csv">
 0,143,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,143,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -70,7 +79,7 @@
 101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101,101
 </data>
  </layer>
- <layer id="8" name="Characters" width="26" height="15">
+ <layer id="8" name="Characters" width="26" height="15" visible="0" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,0,0,0,0,

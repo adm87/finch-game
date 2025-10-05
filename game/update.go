@@ -3,8 +3,8 @@ package game
 import (
 	"github.com/adm87/finch-core/finch"
 	"github.com/adm87/finch-core/fsys"
-	"github.com/adm87/finch-core/geom"
 	"github.com/adm87/finch-game/data"
+	"github.com/adm87/finch-game/level"
 	"github.com/adm87/finch-tiled/tiled"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -13,39 +13,15 @@ import (
 func Update(ctx finch.Context) {
 	pollInput(ctx)
 
-	movement := geom.NewPoint64(panX, panY).
-		Normalized()
-
-	targetX += movement.X * 100 * ctx.Time().DeltaSeconds()
-	targetY += movement.Y * 100 * ctx.Time().DeltaSeconds()
-
-	if panY == 0 {
-		targetY += 200 * ctx.Time().DeltaSeconds()
-	}
+	level.Update(ctx, camera.Viewport(), camera.ViewMatrix())
 }
 
 func FixedUpdate(ctx finch.Context) {
-	debugCollider.X = fsys.Lerp(debugCollider.X, targetX, ctx.Time().FixedSeconds()*10)
-	debugCollider.Y = fsys.Lerp(debugCollider.Y, targetY, ctx.Time().FixedSeconds()*10)
-	collisionWorld.UpdateCollider(debugCollider)
-
-	collisionWorld.CheckForCollisions(ctx.Time().FixedSeconds())
+	level.FixedUpdate(ctx, camera.Viewport(), camera.ViewMatrix())
 }
 
 func LateUpdate(ctx finch.Context) {
-	viewport := camera.Viewport()
-
-	hw := viewport.Width / 2
-	hh := viewport.Height / 2
-
-	maxx := float64(selectedMap.Width())*float64(selectedMap.TileWidth()) - hw
-	maxy := float64(selectedMap.Height())*float64(selectedMap.TileHeight()) - hh
-
-	camera.X = debugCollider.X + debugCollider.Width/2
-	camera.Y = debugCollider.Y + debugCollider.Height/2
-
-	camera.X = fsys.Clamp(camera.X, hw, maxx)
-	camera.Y = fsys.Clamp(camera.Y, hh, maxy)
+	level.LateUpdate(ctx, camera.Viewport(), camera.ViewMatrix())
 }
 
 func pollInput(ctx finch.Context) {
@@ -53,44 +29,26 @@ func pollInput(ctx finch.Context) {
 		finch.Exit()
 	}
 
+	if inpututil.IsKeyJustPressed(ebiten.KeyF1) {
+		level.SetupLevel(tiled.MustGetTMX(data.TilemapExampleA))
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyF2) {
+		level.SetupLevel(tiled.MustGetTMX(data.TilemapExampleB))
+	}
+
 	if inpututil.IsKeyJustPressed(ebiten.KeyF5) {
-		drawColliders = !drawColliders
+		debugColliders = !debugColliders
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyF6) {
-		drawCollisionGrid = !drawCollisionGrid
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyF7) {
-		drawTiledMap = !drawTiledMap
+		debugCollisionGrid = !debugCollisionGrid
 	}
 
 	if inpututil.IsKeyJustPressed(ebiten.KeyF11) {
 		ebiten.SetFullscreen(!ebiten.IsFullscreen())
 	}
 
-	if inpututil.IsKeyJustPressed(ebiten.Key1) {
-		setupLevel(tiled.MustGetTMX(data.TilemapExampleA))
-	}
-	if inpututil.IsKeyJustPressed(ebiten.Key2) {
-		setupLevel(tiled.MustGetTMX(data.TilemapExampleB))
-	}
-
-	panX, panY = 0, 0
-
-	if ebiten.IsKeyPressed(ebiten.KeyArrowLeft) || ebiten.IsKeyPressed(ebiten.KeyA) {
-		panX -= 1
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyArrowRight) || ebiten.IsKeyPressed(ebiten.KeyD) {
-		panX += 1
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
-		panY -= 1
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyArrowDown) || ebiten.IsKeyPressed(ebiten.KeyS) {
-		panY += 1
-	}
-
 	if _, y := ebiten.Wheel(); y != 0 {
-		newZoom := fsys.Clamp(camera.Zoom()+y*0.1, 1, 3)
+		newZoom := fsys.Clamp(camera.Zoom()+y*0.1, 1, 2)
 		camera.SetZoom(newZoom)
 	}
 }

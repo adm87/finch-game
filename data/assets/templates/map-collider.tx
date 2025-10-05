@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object width="18" height="18">
+  <properties>
+   <property name="Collision" type="class" propertytype="CollisionProperties">
+    <properties>
+     <property name="ColliderType" propertytype="ColliderType" value="Static"/>
+     <property name="CollisionLayer" propertytype="CollisionLayer" value="Platform"/>
+    </properties>
+   </property>
+  </properties>
+ </object>
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tilesets/tileset-tiles.tsx"/>
+ <object name="Coin" gid="152" width="18" height="18">
+  <properties>
+   <property name="ActorType" propertytype="ActorType" value="Pickup"/>
+   <property name="Collision" type="class" propertytype="CollisionProperties">
+    <properties>
+     <property name="ColliderType" propertytype="ColliderType" value="Dynamic"/>
+     <property name="CollisionLayer" propertytype="CollisionLayer" value="Pickup"/>
+    </properties>
+   </property>
+  </properties>
+ </object>
+</template>
