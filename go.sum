@@ -12,6 +12,8 @@ github.com/adm87/finch-collision v0.0.6 h1:vblIGi8oCEGx2iebi8VaWYqwDR1yQ/n0nTgoz
 github.com/adm87/finch-collision v0.0.6/go.mod h1:JTlPpjbcXIZR+KMprWXVkIJCJj4CucBo6MS1NneldYY=
 github.com/adm87/finch-collision v0.0.7 h1:Q9hwwQVKcXDfvDhbSGEb9PEvoBTQbn6tjSW7yYG8DkE=
 github.com/adm87/finch-collision v0.0.7/go.mod h1:EZWiq8/Yzs18vH1WiwGbuVxsGKsVzvw1J7q9pVgCfW0=
+github.com/adm87/finch-collision v0.0.9-0.20251009005458-f26a1237f877 h1:UxTVwCXwYG5mPoifazP8pRvXzZIHHgLBpytSK/Mp0Q4=
+github.com/adm87/finch-collision v0.0.9-0.20251009005458-f26a1237f877/go.mod h1:YydMP03SKQMjYZ3Hvnuo/8Nbdo7lTU38pZcnw/25eJI=
 github.com/adm87/finch-core v0.0.3 h1:XbLqweFgJkT0piqMloA7Sy6soAJJV6C4cgEqWcirvow=
 github.com/adm87/finch-core v0.0.3/go.mod h1:cmf7U8JChtnbuj07B8tKbMlfdpme28pmiU5zkw31OBM=
 github.com/adm87/finch-core v0.0.4 h1:F8WV2YzROxye7n7Cp08NoxqMhKcH27imeOCj6baB2Ds=
@@ -26,6 +28,8 @@ github.com/adm87/finch-core v0.0.8 h1:gOVhBkClcXtmQ9lw/oBf1IS4ZAH/Hbx4IidG2ih51/
 github.com/adm87/finch-core v0.0.8/go.mod h1:cmf7U8JChtnbuj07B8tKbMlfdpme28pmiU5zkw31OBM=
 github.com/adm87/finch-core v0.0.9 h1:suG4OF2XJw2Zdw4jXEj1bkw9kwHfvTh+Mh/EIHYJG4I=
 github.com/adm87/finch-core v0.0.9/go.mod h1:cmf7U8JChtnbuj07B8tKbMlfdpme28pmiU5zkw31OBM=
+github.com/adm87/finch-core v0.0.10 h1:tR9I7N4LR8mC8uuau7gi9048pk//5NK80E+6mjjaW4Y=
+github.com/adm87/finch-core v0.0.10/go.mod h1:cmf7U8JChtnbuj07B8tKbMlfdpme28pmiU5zkw31OBM=
 github.com/adm87/finch-tiled v0.0.4 h1:o/Llj9zqzhy+ruHcCgoVeS9y5PCHh6vNdgNXuHPIilw=
 github.com/adm87/finch-tiled v0.0.4/go.mod h1:hvyUOglxSj/qN9idguruxekFQik08tQOKAVKZRxiLFA=
 github.com/adm87/finch-tiled v0.0.5 h1:fICBG04g5rl8/9f/F7ueANa6+tRpWlxgSVK46rHKHBA=
@@ -36,6 +40,8 @@ github.com/adm87/finch-tiled v0.0.7 h1:OmLuMtccA24Txujw/I7qFsMvrk+6fzu4/oUaTB5sR
 github.com/adm87/finch-tiled v0.0.7/go.mod h1:leiZbEjMmvFFpa29ndbMmOZwY1mLkLAhHK3dH8NCe10=
 github.com/adm87/finch-tiled v0.0.8 h1:ap3d+EeZu9mEy3gFVUCd7PTuaA+mUhhPaPgBqi08/G8=
 github.com/adm87/finch-tiled v0.0.8/go.mod h1:QKI19l39FeR0rpTZ+JPMF+klZhmixJ8k6VKMGlfMgfc=
+github.com/adm87/finch-tiled v0.0.9 h1:xmcpNosk8pyA2H6Zd/XNEnHgt3GHbhl2fnvH8VEzP9Q=
+github.com/adm87/finch-tiled v0.0.9/go.mod h1:xSOIzgFHZNz/23NIlHR3DRR8F7mydXwexI7p9dyj/wQ=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/ebitengine/gomobile v0.0.0-20240911145611-4856209ac325 h1:Gk1XUEttOk0/hb6Tq3WkmutWa0ZLhNn/6fc6XZpM7tM=
 github.com/ebitengine/gomobile v0.0.0-20240911145611-4856209ac325/go.mod h1:ulhSQcbPioQrallSuIzF8l1NKQoD7xmMZc5NxzibUMY=

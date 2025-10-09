@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
  <tileset firstgid="1" source="../tilesets/tileset-characters.tsx"/>
- <object name="Player" gid="2147483649" width="24" height="24">
+ <object gid="2147483649" width="24" height="24">
   <properties>
    <property name="ActorType" propertytype="ActorType" value="Player"/>
-   <property name="Collision" type="class" propertytype="CollisionProperties">
+   <property name="BoxCollider" type="class" propertytype="BoxCollider">
     <properties>
-     <property name="ColliderType" propertytype="ColliderType" value="Dynamic"/>
-     <property name="CollisionLayer" propertytype="CollisionLayer" value="Player"/>
+     <property name="DetectionMode" propertytype="CollisionDetectionType" value="Continuous"/>
+     <property name="Layer" propertytype="CollisionLayer" value="Player"/>
+     <property name="Type" propertytype="ColliderType" value="Dynamic"/>
     </properties>
    </property>
   </properties>

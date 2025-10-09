@@ -9,6 +9,7 @@ import (
 	"github.com/adm87/finch-core/fsys"
 	"github.com/adm87/finch-game/actor"
 	"github.com/adm87/finch-game/data"
+	"github.com/adm87/finch-game/scene"
 	"github.com/adm87/finch-tiled/project"
 	"github.com/spf13/cobra"
 )
@@ -72,6 +73,15 @@ func importCollisionEnums(proj *project.TiledProject) error {
 			Values:        enum.Names[collision.CollisionLayer](),
 			ValuesAsFlags: false,
 		},
+		project.TiledEnumPropertyType{
+			TiledPropertyType: project.TiledPropertyType{
+				Name: "SceneLayer",
+				Type: "enum",
+			},
+			StorageType:   "string",
+			Values:        enum.Names[scene.SceneLayer](),
+			ValuesAsFlags: false,
+		},
 	)
 }
 
@@ -79,23 +89,29 @@ func importCollisionClasses(proj *project.TiledProject) error {
 	return project.InsertOrUpdateClassType(proj,
 		project.TiledClassPropertyType{
 			TiledPropertyType: project.TiledPropertyType{
-				Name: "CollisionProperties",
+				Name: "BoxCollider",
 				Type: "class",
 			},
 			Color:    "#ff0000",
 			DrawFill: false,
 			Members: []project.TiledClassMember{
 				{
-					Name:         "ColliderType",
-					PropertyType: "ColliderType",
+					Name:         "DetectionMode",
+					PropertyType: "CollisionDetectionType",
 					Type:         "string",
-					Value:        collision.ColliderDynamic.String(),
+					Value:        collision.CollisionDetectionDiscrete.String(),
 				},
 				{
-					Name:         "CollisionLayer",
+					Name:         "Layer",
 					PropertyType: "CollisionLayer",
 					Type:         "string",
 					Value:        collision.CollisionLayer(0).String(),
+				},
+				{
+					Name:         "Type",
+					PropertyType: "ColliderType",
+					Type:         "string",
+					Value:        collision.ColliderDynamic.String(),
 				},
 			},
 			UseAs: []project.TiledClassUseAs{

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object width="18" height="18">
+  <properties>
+   <property name="BoxCollider" type="class" propertytype="BoxCollider">
+    <properties>
+     <property name="DetectionMode" propertytype="CollisionDetectionType" value="Discrete"/>
+     <property name="Layer" propertytype="CollisionLayer" value="Static"/>
+     <property name="Type" propertytype="ColliderType" value="Static"/>
+    </properties>
+   </property>
+  </properties>
+ </object>
+</template>

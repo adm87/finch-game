@@ -1,4 +1,4 @@
-package game
+package camera
 
 import (
 	"github.com/adm87/finch-core/geom"
